@@ -6,25 +6,24 @@
   <title>テスト対応</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {{
+    body {
       font-family: "Segoe UI", sans-serif;
       margin: 0;
       padding: 2rem;
-      background-color: #f9f9f9;
-    }}
-    h1 {{
+      background-color: #f7f7f7;
+    }
+    h1 {
       text-align: center;
       margin-bottom: 2rem;
       color: #333;
-    }}
-    .tabs {{
+    }
+    .tabs {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 1rem;
       border-bottom: 2px solid #ccc;
-    }}
-    .tab-button {{
+    }
+    .tab-button {
       padding: 0.6rem 1.2rem;
       margin: 0.2rem;
       background-color: #e0e0e0;
@@ -32,45 +31,43 @@
       border-radius: 6px 6px 0 0;
       cursor: pointer;
       font-size: 0.95rem;
-    }}
-    .tab-button.active {{
+      color: #333;
+    }
+    .tab-button.active {
       background-color: #007aff;
       color: white;
       font-weight: bold;
-    }}
-    .tab-content {{
+    }
+    .tab-content {
       display: none;
-      background: white;
       padding: 1.5rem;
+      background-color: white;
       border-radius: 0 0 10px 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       margin-top: -1px;
-    }}
-    .tab-content.active {{
+    }
+    .tab-content.active {
       display: block;
-    }}
-    .search-box {{
-      margin-bottom: 1rem;
-    }}
-    .search-box input {{
+    }
+    .search-box input {
       width: 100%;
       padding: 0.6rem;
       font-size: 1rem;
       border-radius: 6px;
       border: 1px solid #ccc;
-    }}
-    .results {{
+    }
+    .results {
       margin-top: 1rem;
-    }}
-    .result-item {{
+    }
+    .result-item {
       border-bottom: 1px solid #ddd;
       padding: 0.5rem 0;
-    }}
-    .result-item strong {{
+    }
+    .result-item strong {
       display: block;
       color: #007aff;
-    }}
-    .screenshot-area {{
+    }
+    .screenshot-area {
       margin-top: 2rem;
       padding: 1rem;
       background: #f0f0f0;
@@ -78,33 +75,35 @@
       text-align: center;
       border-radius: 8px;
       color: #666;
-    }}
+    }
   </style>
 </head>
 <body>
+
 <h1>テスト対応</h1>
-<div class="tabs" id="tabs"></div>
+
+<div class="tabs">
+  <button class="tab-button active" onclick="showTab(0)">玉手箱（言語）</button>
+  <button class="tab-button" onclick="showTab(1)">玉手箱（非言語）</button>
+  <button class="tab-button" onclick="showTab(2)">SPI（言語）</button>
+  <button class="tab-button" onclick="showTab(3)">SPI（非言語）</button>
+  <button class="tab-button" onclick="showTab(4)">TG-Web（言語）</button>
+  <button class="tab-button" onclick="showTab(5)">TG-Web（非言語）</button>
+</div>
+
 <div id="tabContents"></div>
 
 <script>
-let data = {{}};
+let data = {};
 
 fetch('test_data.json')
   .then(response => response.json())
-  .then(json => {{
+  .then(json => {
     data = json;
-
     const tabKeys = Object.keys(data);
-    const tabsDiv = document.getElementById('tabs');
     const contentsDiv = document.getElementById('tabContents');
 
-    tabKeys.forEach((tabName, idx) => {{
-      const btn = document.createElement('button');
-      btn.className = 'tab-button' + (idx === 0 ? ' active' : '');
-      btn.textContent = tabName;
-      btn.onclick = () => showTab(idx);
-      tabsDiv.appendChild(btn);
-
+    tabKeys.forEach((tabName, idx) => {
       const tabDiv = document.createElement('div');
       tabDiv.className = 'tab-content' + (idx === 0 ? ' active' : '');
 
@@ -121,7 +120,7 @@ fetch('test_data.json')
 
       const screenshot = document.createElement('div');
       screenshot.className = 'screenshot-area';
-      screenshot.textContent = 'ここにスクリーンショット（画像）を後から追加して、題干を自動抽出できます。';
+      screenshot.textContent = 'ここにスクリーンショットを追加して、題干自動認識予定';
 
       tabDiv.appendChild(searchBox);
       tabDiv.appendChild(results);
@@ -129,42 +128,42 @@ fetch('test_data.json')
       contentsDiv.appendChild(tabDiv);
 
       updateResults(idx, '');
-    }});
-  }});
+    });
+  });
 
-function showTab(index) {{
-  document.querySelectorAll('.tab-button').forEach((btn, i) => {{
+function showTab(index) {
+  document.querySelectorAll('.tab-button').forEach((btn, i) => {
     btn.classList.toggle('active', i === index);
-  }});
-  document.querySelectorAll('.tab-content').forEach((tab, i) => {{
+  });
+  document.querySelectorAll('.tab-content').forEach((tab, i) => {
     tab.classList.toggle('active', i === index);
-  }});
-}}
+  });
+}
 
-function updateResults(idx, keyword) {{
+function updateResults(idx, keyword) {
   const container = document.getElementById(`results-${idx}`);
   container.innerHTML = '';
 
   const keywords = keyword.trim().toLowerCase().split(/\s+/);
   const items = data[Object.keys(data)[idx]];
 
-  const filtered = items.filter(item => {{
+  const filtered = items.filter(item => {
     return keywords.every(kw =>
       item.Question.toLowerCase().includes(kw)
     );
-  }});
+  });
 
-  filtered.forEach(item => {{
+  filtered.forEach(item => {
     const div = document.createElement('div');
     div.className = 'result-item';
-    div.innerHTML = `<strong>【題干】</strong>${{item.Question}}<br><strong>【答案】</strong>${{item.Answer}}`;
+    div.innerHTML = `<strong>【題干】</strong>${item.Question}<br><strong>【答案】</strong>${item.Answer}`;
     container.appendChild(div);
-  }});
+  });
 
-  if (filtered.length === 0) {{
+  if (filtered.length === 0) {
     container.innerHTML = '<div class="result-item">該当する問題が見つかりませんでした。</div>';
-  }}
-}}
+  }
+}
 </script>
 
 </body>
