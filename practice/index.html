@@ -1,11 +1,107 @@
-<!-- practice/index.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>練習対応ページ</title>
+  <title>練習対応メニュー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    .category {
+      margin-bottom: 2rem;
+    }
+
+    .category h2 {
+      font-size: 1.2rem;
+      color: #007aff;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #007aff;
+      padding-bottom: 0.3rem;
+    }
+
+    .test-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .test-item {
+      background: #fff;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .test-item a {
+      text-decoration: none;
+      color: #007aff;
+      font-weight: bold;
+    }
+
+    .test-time {
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
-  <h1>これは練習対応ページです！</h1>
+
+  <h1>練習対応メニュー</h1>
+
+  <div class="category">
+    <h2>数理問題</h2>
+    <ul class="test-list">
+      <li class="test-item">
+        <a href="../type11/start.html" target="_blank">四則逆算</a>
+        <span class="test-time">9分／50問</span>
+      </li>
+      <li class="test-item">
+        <a href="../type12/start.html" target="_blank">図表の読取り</a>
+        <span class="test-time">15分／29問</span>
+      </li>
+      <li class="test-item">
+        <a href="../type13/start.html" target="_blank">表の穴埋め</a>
+        <span class="test-time">20分／20問</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="category">
+    <h2>言語・性格診断</h2>
+    <ul class="test-list">
+      <li class="test-item">
+        <a href="../type41/index.html" target="_blank">性格診断（本格版）</a>
+        <span class="test-time">20分／68問</span>
+      </li>
+      <li class="test-item">
+        <a href="../type42/index.html" target="_blank">性格診断（簡易版）</a>
+        <span class="test-time">約10分／30問</span>
+      </li>
+      <li class="test-item">
+        <a href="../type43/index.html" target="_blank">意欲テスト（本格版）</a>
+        <span class="test-time">15分／36問</span>
+      </li>
+      <li class="test-item">
+        <a href="../type44/index.html" target="_blank">意欲テスト（簡易版）</a>
+        <span class="test-time">10分／36問</span>
+      </li>
+    </ul>
+  </div>
+
 </body>
 </html>
