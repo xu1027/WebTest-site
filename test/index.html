@@ -87,87 +87,6 @@
 <div id="tabContents"></div>
 
 <script>
-const data = JSON.parse(`__DATA__`);
-
-const tabKeys = Object.keys(data);
-const tabsDiv = document.getElementById('tabs');
-const contentsDiv = document.getElementById('tabContents');
-
-// 初期描画
-tabKeys.forEach((tabName, idx) => {
-  // タブボタン
-  const btn = document.createElement('button');
-  btn.className = 'tab-button' + (idx === 0 ? ' active' : '');
-  btn.textContent = tabName;
-  btn.onclick = () => showTab(idx);
-  tabsDiv.appendChild(btn);
-
-  // タブ内容
-  const tabDiv = document.createElement('div');
-  tabDiv.className = 'tab-content' + (idx === 0 ? ' active' : '');
-
-  // 検索エリア
-  const searchBox = document.createElement('div');
-  searchBox.className = 'search-box';
-  const input = document.createElement('input');
-  input.placeholder = 'キーワードを入力（例：フランス 年齢）';
-  input.oninput = () => updateResults(idx, input.value);
-  searchBox.appendChild(input);
-
-  // 結果表示
-  const results = document.createElement('div');
-  results.className = 'results';
-  results.id = `results-${idx}`;
-
-  // スクリーンショット領域
-  const screenshot = document.createElement('div');
-  screenshot.className = 'screenshot-area';
-  screenshot.textContent = 'ここにスクリーンショット（画像）を後から追加して、題干を自動抽出できます。';
-
-  // 全て追加
-  tabDiv.appendChild(searchBox);
-  tabDiv.appendChild(results);
-  tabDiv.appendChild(screenshot);
-  contentsDiv.appendChild(tabDiv);
-
-  // 初期全表示
-  updateResults(idx, '');
-});
-
-function showTab(index) {
-  document.querySelectorAll('.tab-button').forEach((btn, i) => {
-    btn.classList.toggle('active', i === index);
-  });
-  document.querySelectorAll('.tab-content').forEach((tab, i) => {
-    tab.classList.toggle('active', i === index);
-  });
-}
-
-function updateResults(idx, keyword) {
-  const container = document.getElementById(`results-${idx}`);
-  container.innerHTML = '';
-
-  const keywords = keyword.trim().toLowerCase().split(/\s+/);
-  const items = data[tabKeys[idx]];
-
-  const filtered = items.filter(item => {
-    return keywords.every(kw =>
-      item.Question.toLowerCase().includes(kw)
-    );
-  });
-
-  filtered.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'result-item';
-    div.innerHTML = `<strong>【題干】</strong>${item.Question}<br><strong>【答案】</strong>${item.Answer}`;
-    container.appendChild(div);
-  });
-
-  if (filtered.length === 0) {
-    container.innerHTML = '<div class="result-item">該当する問題が見つかりませんでした。</div>';
-  }
-}
-
 const data = JSON.parse(`
 {
   "玉手箱（言语）": [
@@ -12111,6 +12030,87 @@ const data = JSON.parse(`
     }
   ]
 }`);
+
+  
+const tabKeys = Object.keys(data);
+const tabsDiv = document.getElementById('tabs');
+const contentsDiv = document.getElementById('tabContents');
+
+// 初期描画
+tabKeys.forEach((tabName, idx) => {
+  // タブボタン
+  const btn = document.createElement('button');
+  btn.className = 'tab-button' + (idx === 0 ? ' active' : '');
+  btn.textContent = tabName;
+  btn.onclick = () => showTab(idx);
+  tabsDiv.appendChild(btn);
+
+  // タブ内容
+  const tabDiv = document.createElement('div');
+  tabDiv.className = 'tab-content' + (idx === 0 ? ' active' : '');
+
+  // 検索エリア
+  const searchBox = document.createElement('div');
+  searchBox.className = 'search-box';
+  const input = document.createElement('input');
+  input.placeholder = 'キーワードを入力（例：フランス 年齢）';
+  input.oninput = () => updateResults(idx, input.value);
+  searchBox.appendChild(input);
+
+  // 結果表示
+  const results = document.createElement('div');
+  results.className = 'results';
+  results.id = `results-${idx}`;
+
+  // スクリーンショット領域
+  const screenshot = document.createElement('div');
+  screenshot.className = 'screenshot-area';
+  screenshot.textContent = 'ここにスクリーンショット（画像）を後から追加して、題干を自動抽出できます。';
+
+  // 全て追加
+  tabDiv.appendChild(searchBox);
+  tabDiv.appendChild(results);
+  tabDiv.appendChild(screenshot);
+  contentsDiv.appendChild(tabDiv);
+
+  // 初期全表示
+  updateResults(idx, '');
+});
+
+function showTab(index) {
+  document.querySelectorAll('.tab-button').forEach((btn, i) => {
+    btn.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.tab-content').forEach((tab, i) => {
+    tab.classList.toggle('active', i === index);
+  });
+}
+
+function updateResults(idx, keyword) {
+  const container = document.getElementById(`results-${idx}`);
+  container.innerHTML = '';
+
+  const keywords = keyword.trim().toLowerCase().split(/\s+/);
+  const items = data[tabKeys[idx]];
+
+  const filtered = items.filter(item => {
+    return keywords.every(kw =>
+      item.Question.toLowerCase().includes(kw)
+    );
+  });
+
+  filtered.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'result-item';
+    div.innerHTML = `<strong>【題干】</strong>${item.Question}<br><strong>【答案】</strong>${item.Answer}`;
+    container.appendChild(div);
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="result-item">該当する問題が見つかりませんでした。</div>';
+  }
+}
+
 
 </script>
 
