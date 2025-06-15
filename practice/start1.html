@@ -25,7 +25,7 @@
     .btn {
       font-size: 1rem;
       padding: 0.6rem 1.2rem;
-      margin: 1rem;
+      margin: 0.3rem;
       cursor: pointer;
       border: none;
       border-radius: 5px;
@@ -41,10 +41,18 @@
       color: black;
     }
 
+    .option-btn {
+      background-color: #e0e0e0;
+    }
+
     #counter {
       font-size: 1rem;
       margin-bottom: 1rem;
       color: #333;
+    }
+
+    #options-container {
+      margin: 1rem auto;
     }
   </style>
 </head>
@@ -54,22 +62,19 @@
   <div id="counter"></div>
 
   <img id="question-img" src="" alt="問題画像">
+  <div id="options-container"></div>
+
   <button class="btn answer-btn" onclick="showAnswer()">解答</button>
   <button class="btn next-btn" onclick="nextQuestion()">次へ</button>
   <img id="answer-img" src="" alt="解答画像" style="display:none;">
 
   <script>
-    const total = 100;        // 总题数
-    const selectCount = 50;   // 抽选题数
+    const total = 100;
+    const selectCount = 50;
     let selected = [];
     let currentIndex = 0;
+    let allOptions = [];
 
-    // 补0函数 001, 002...
-    function pad(num) {
-      return num.toString().padStart(3, '0');
-    }
-
-    // 随机抽选不重复题号
     function getRandomQuestions() {
       const nums = Array.from({length: total}, (_, i) => i + 1);
       for (let i = nums.length - 1; i > 0; i--) {
@@ -79,12 +84,32 @@
       return nums.slice(0, selectCount);
     }
 
+    function renderOptions(qNum) {
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+      const item = allOptions.find(opt => opt.id === qNum);
+      if (!item) {
+        container.innerHTML = '<p>選択肢が見つかりません</p>';
+        return;
+      }
+      item.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'btn option-btn';
+        btn.textContent = opt;
+        btn.onclick = () => {
+          btn.style.backgroundColor = '#90ee90'; // 点击后变绿
+        };
+        container.appendChild(btn);
+      });
+    }
+
     function loadQuestion() {
       const qNum = selected[currentIndex];
       document.getElementById('question-img').src = `star1/q/${qNum}.gif`;
       document.getElementById('answer-img').style.display = 'none';
-      document.getElementById('answer-img').src = "";
+      document.getElementById('answer-img').src = '';
       document.getElementById('counter').textContent = `第 ${currentIndex + 1} 問 / 全 ${selectCount} 問`;
+      renderOptions(qNum);
     }
 
     function showAnswer() {
@@ -103,8 +128,17 @@
     }
 
     // 初始化
-    selected = getRandomQuestions();
-    loadQuestion();
+    fetch('star1/answer_options.json')
+      .then(response => response.json())
+      .then(data => {
+        allOptions = data;
+        selected = getRandomQuestions();
+        loadQuestion();
+      })
+      .catch(err => {
+        console.error("選択肢ファイルの読み込みに失敗しました:", err);
+        alert("選択肢の読み込みに失敗しました。");
+      });
   </script>
 
 </body>
