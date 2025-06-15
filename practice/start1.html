@@ -85,23 +85,37 @@
     }
 
     function renderOptions(qNum) {
-      const container = document.getElementById('options-container');
-      container.innerHTML = '';
-      const item = allOptions.find(opt => opt.id === qNum);
-      if (!item) {
-        container.innerHTML = '<p>選択肢が見つかりません</p>';
-        return;
-      }
-      item.options.forEach((opt, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'btn option-btn';
-        btn.textContent = opt;
-        btn.onclick = () => {
-          btn.style.backgroundColor = '#90ee90'; // 点击后变绿
-        };
-        container.appendChild(btn);
-      });
-    }
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+
+  const item = allOptions.find(opt => opt.id === qNum);
+  if (!item) {
+    container.innerHTML = '<p>選択肢が見つかりません</p>';
+    return;
+  }
+
+  // 单选按钮组名称唯一
+  const groupName = `option-${qNum}`;
+
+  item.options.forEach((opt, index) => {
+    const label = document.createElement('label');
+    label.style.display = 'block';
+    label.style.margin = '0.5rem 0';
+    label.style.cursor = 'pointer';
+    label.style.fontSize = '1rem';
+
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = groupName;
+    input.value = index + 1;
+    input.style.marginRight = '0.5rem';
+
+    label.appendChild(input);
+    label.appendChild(document.createTextNode(`${index + 1}. ${opt}`));
+    container.appendChild(label);
+  });
+}
+
 
     function loadQuestion() {
       const qNum = selected[currentIndex];
