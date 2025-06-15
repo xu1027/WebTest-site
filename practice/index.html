@@ -18,30 +18,39 @@
       color: #333;
     }
 
-    .category {
-      margin-bottom: 2rem;
+    .section {
+      margin-bottom: 3rem;
     }
 
-    .category h2 {
-      font-size: 1.2rem;
+    .section h2 {
+      font-size: 1.4rem;
       color: #007aff;
-      margin-bottom: 1rem;
       border-bottom: 2px solid #007aff;
       padding-bottom: 0.3rem;
+    }
+
+    .module {
+      margin-top: 1.5rem;
+    }
+
+    .module-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 0.5rem;
     }
 
     .test-list {
       list-style: none;
       padding: 0;
-      margin: 0;
     }
 
     .test-item {
       background: #fff;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      margin-bottom: 0.7rem;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -55,7 +64,7 @@
 
     .test-time {
       font-size: 0.9rem;
-      color: #555;
+      color: #666;
     }
   </style>
 </head>
@@ -63,44 +72,114 @@
 
   <h1>練習対応メニュー</h1>
 
-  <div class="category">
-    <h2>数理問題</h2>
-    <ul class="test-list">
-      <li class="test-item">
-        <a href="../type11/start.html" target="_blank">四則逆算</a>
-        <span class="test-time">9分／50問</span>
-      </li>
-      <li class="test-item">
-        <a href="../type12/start.html" target="_blank">図表の読取り</a>
-        <span class="test-time">15分／29問</span>
-      </li>
-      <li class="test-item">
-        <a href="../type13/start.html" target="_blank">表の穴埋め</a>
-        <span class="test-time">20分／20問</span>
-      </li>
-    </ul>
+  <!-- 玉手箱対策 -->
+  <div class="section">
+    <h2>玉手箱対策</h2>
+
+    <div class="module">
+      <div class="module-title">計数</div>
+      <ul class="test-list">
+        <li class="test-item">
+          <a href="../type11/start.html" target="_blank">四則逆算</a>
+          <span class="test-time">9分／50問</span>
+        </li>
+        <li class="test-item">
+          <a href="../type12/start.html" target="_blank">図表の読取り</a>
+          <span class="test-time">15分／29問</span>
+        </li>
+        <li class="test-item">
+          <a href="../type13/start.html" target="_blank">表の穴埋め</a>
+          <span class="test-time">20分／20問</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="module">
+      <div class="module-title">言語</div>
+      <ul class="test-list">
+        <li class="test-item">
+          <a href="../type21/start.html" target="_blank">GAB形式</a>
+          <span class="test-time">15分／36問</span>
+        </li>
+        <li class="test-item">
+          <a href="../type22/start.html" target="_blank">IMAGES形式</a>
+          <span class="test-time">10分／32問</span>
+        </li>
+        <li class="test-item">
+          <a href="../type23/start.html" target="_blank">趣旨把握形式</a>
+          <span class="test-time">12分／10問</span>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <div class="category">
-    <h2>言語・性格診断</h2>
-    <ul class="test-list">
-      <li class="test-item">
-        <a href="../type41/index.html" target="_blank">性格診断（本格版）</a>
-        <span class="test-time">20分／68問</span>
-      </li>
-      <li class="test-item">
-        <a href="../type42/index.html" target="_blank">性格診断（簡易版）</a>
-        <span class="test-time">約10分／30問</span>
-      </li>
-      <li class="test-item">
-        <a href="../type43/index.html" target="_blank">意欲テスト（本格版）</a>
-        <span class="test-time">15分／36問</span>
-      </li>
-      <li class="test-item">
-        <a href="../type44/index.html" target="_blank">意欲テスト（簡易版）</a>
-        <span class="test-time">10分／36問</span>
-      </li>
-    </ul>
+  <!-- TGWEB対策 -->
+  <div class="section">
+    <h2>TGWEB対策</h2>
+
+    <div class="module">
+      <div class="module-title">計数</div>
+      <ul class="test-list">
+        <li class="test-item">
+          <a href="../type_new_1/start.html" target="_blank">計数Aタイプ（旧形式1）</a>
+          <span class="test-time">18分／9問</span>
+        </li>
+        <li class="test-item">
+          <a href="../type_new_2/start.html" target="_blank">計数Aタイプ（旧形式2）</a>
+          <span class="test-time">18分／9問</span>
+        </li>
+        <li class="test-item">
+          <a href="../type54/index.html" target="_blank">計数Bタイプ（新形式1）</a>
+          <span class="test-time">8分／36問</span>
+        </li>
+        <li class="test-item">
+          <a href="../type57/index.html" target="_blank">計数Bタイプ（新形式2）</a>
+          <span class="test-time">8分／36問</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="module">
+      <div class="module-title">言語</div>
+      <ul class="test-list">
+        <li class="test-item">
+          <a href="../type_new_3/start.html" target="_blank">言語Aタイプ（旧形式）</a>
+          <span class="test-time">12分／12問</span>
+        </li>
+        <li class="test-item">
+          <a href="../type53/index.html" target="_blank">言語Bタイプ（新形式）</a>
+          <span class="test-time">7分／34問</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="module">
+      <div class="module-title">英語</div>
+      <ul class="test-list">
+        <li class="test-item">
+          <a href="../type55/index.html" target="_blank">英語</a>
+          <span class="test-time">15分／10問</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="module">
+      <div class="module-title">性格</div>
+      <ul class="test-list">
+        <li class="test-item">
+          <a href="../type62/index.html" target="_blank">A8</a>
+          <span class="test-time">30分／156問</span>
+        </li>
+        <li class="test-item">
+          <a href="../type61/index.html" target="_blank">G9</a>
+          <span class="test-time">10分／60問</span>
+        </li>
+        <li class="test-item">
+          <a href="../type64/index.html" target="_blank">W8</a>
+          <span class="test-time">10分／40問</span>
+        </li>
+      </ul>
+    </div>
   </div>
 
 </body>
