@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>結果発表</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 3rem;
+      background-color: #f9f9f9;
+    }
+
+    h1 {
+      color: #007aff;
+      margin-bottom: 2rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>結果発表</h1>
+  <p id="result">採点中...</p>
+
+  <script>
+    const answers = JSON.parse(localStorage.getItem('answers') || '[]');
+    const selected = JSON.parse(localStorage.getItem('selectedQuestions') || '[]');
+    let correct = 0;
+
+    // 正解データ
+    fetch('answer_options.json')
+      .then(response => response.json())
+      .then(options => {
+        selected.forEach((qId, index) => {
+          const question = options.find(opt => opt.id === qId);
+          if (!question) return;
+          const correctIndex = question.options.findIndex(opt => opt.correct === true);
+          if (correctIndex === -1) return;
+          if (answers[index] === correctIndex + 1) correct++;
+        });
+
+        document.getElementById('result').textContent =
+          `50問中 ${correct}問正解！`;
+      })
+      .catch(() => {
+        document.getElementById('result').textContent = '採点データの読み込みに失敗しました。';
+      });
+  </script>
+</body>
+</html>
