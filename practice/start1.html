@@ -158,15 +158,23 @@
       document.getElementById('answer-img').style.display = 'block';
     }
 
-    function nextQuestion() {
-      saveAnswer();
-      if (currentIndex < selectCount - 1) {
-        currentIndex++;
-        loadQuestion();
-      } else {
-        finishQuiz();
-      }
-    }
+　　function nextQuestion() {
+  const qNum = selected[currentIndex];
+  const selectedInput = document.querySelector(`input[name="option-${qNum}"]:checked`);
+  if (!selectedInput) {
+    alert("選択肢を選んでください。");
+    return;
+  }
+
+  saveAnswer();
+  if (currentIndex < selectCount - 1) {
+    currentIndex++;
+    loadQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
 
     function finishQuiz() {
       saveAnswer();
