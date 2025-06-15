@@ -64,7 +64,7 @@
   </div>
 
   <div class="login-box" id="menuBox" style="display:none">
-    <h2>対応メニュー</h2>
+    <h2 id="welcomeText">対応メニュー</h2>
     <div class="branch-buttons">
       <button onclick="location.href='practice/index.html'">練習対応</button>
       <button onclick="location.href='test/index.html'">テスト対応</button>
@@ -74,8 +74,8 @@
   <script>
     let userData = [];
 
-    // 事前に json 読み込む
-    fetch('user_accounts_100.json')  // 确保和 index.html 同目录
+    // JSON ファイルから ID/PW を読み込む（※必ず ID/ 下に配置）
+    fetch('ID/user_accounts_100.json')
       .then(res => res.json())
       .then(data => {
         userData = data;
@@ -89,6 +89,11 @@
       const id = document.getElementById('userid').value.trim();
       const pw = document.getElementById('password').value.trim();
 
+      if (!id || !pw) {
+        alert("IDとパスワードを両方入力してください。");
+        return;
+      }
+
       const matched = userData.find(user => user.id === id && user.password === pw);
 
       if (!matched) {
@@ -96,13 +101,13 @@
         return;
       }
 
-      // 成功時
+      // 成功時：ログイン情報保存・画面切替・ユーザー表示
+      sessionStorage.setItem('loginUserId', id);
       document.getElementById('loginBox').style.display = 'none';
       document.getElementById('menuBox').style.display = 'block';
-
-      // 保存当前用户 ID，如果之后需要追踪可以用
-      sessionStorage.setItem('loginUserId', id);
+      document.getElementById('welcomeText').textContent = `ようこそ ${id} さん`;
     }
   </script>
+
 </body>
 </html>
