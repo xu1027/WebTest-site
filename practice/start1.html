@@ -80,7 +80,7 @@
     }
 
     function loadQuestion() {
-      const qNum = pad(selected[currentIndex]);
+      const qNum = selected[currentIndex];
       document.getElementById('question-img').src = `star1/q/${qNum}.gif`;
       document.getElementById('answer-img').style.display = 'none';
       document.getElementById('answer-img').src = "";
@@ -88,7 +88,7 @@
     }
 
     function showAnswer() {
-      const aNum = pad(selected[currentIndex]);
+      const aNum = selected[currentIndex];
       document.getElementById('answer-img').src = `star1/a/${aNum}.gif`;
       document.getElementById('answer-img').style.display = 'block';
     }
