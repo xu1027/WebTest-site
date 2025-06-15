@@ -64,15 +64,14 @@
 
   <button class="btn answer-btn" onclick="showAnswer()">解答</button>
   <button class="btn next-btn" onclick="nextQuestion()">次へ</button>
-
   <img id="answer-img" src="" alt="解答画像" style="display:none;">
 
-  <!-- 引入你的 start1.js -->
-  <script src="./start1.js"></script>
+  <!-- 加载你的旧 JS 文件 -->
+  <script src="./star1/start1.js"></script>
 
   <script>
-    const total = 100;        // 总题数
-    const selectCount = 50;   // 抽选题数
+    const total = 100;
+    const selectCount = 50;
     let selected = [];
     let currentIndex = 0;
 
@@ -87,38 +86,37 @@
 
     function loadQuestion() {
       const qNum = selected[currentIndex];
-      document.getElementById('question-img').src = `./q/${qNum}.gif`;
+      document.getElementById('question-img').src = `./star1/q/${qNum}.gif`;
       document.getElementById('answer-img').style.display = 'none';
       document.getElementById('answer-img').src = "";
       document.getElementById('counter').textContent = `第 ${currentIndex + 1} 問 / 全 ${selectCount} 問`;
 
-      // 显示选项
+      // 选项
       answerData();
-      let html = '';
-      html += `<input type="radio" name="sa" value="1"> ${answer1[qNum]}<br>`;
-      html += `<input type="radio" name="sa" value="2"> ${answer2[qNum]}<br>`;
-      html += `<input type="radio" name="sa" value="3"> ${answer3[qNum]}<br>`;
-      html += `<input type="radio" name="sa" value="4"> ${answer4[qNum]}<br>`;
-      html += `<input type="radio" name="sa" value="5"> ${answer5[qNum]}<br>`;
-      document.getElementById('options-area').innerHTML = html;
+      const area = document.getElementById('options-area');
+      area.innerHTML = `
+        <input type="radio" name="sa" value="1">${answer1[qNum]}<br>
+        <input type="radio" name="sa" value="2">${answer2[qNum]}<br>
+        <input type="radio" name="sa" value="3">${answer3[qNum]}<br>
+        <input type="radio" name="sa" value="4">${answer4[qNum]}<br>
+        <input type="radio" name="sa" value="5">${answer5[qNum]}<br>
+      `;
     }
 
     function showAnswer() {
-      const qNum = selected[currentIndex];
-      document.getElementById('answer-img').src = `./a/${qNum}.gif`;
-      document.getElementById('answer-img').style.display = 'block';
-
       const selectedOption = document.querySelector('input[name="sa"]:checked');
       if (!selectedOption) {
         alert("選択肢を選んでください！");
         return;
       }
 
-      const userAnswer = selectedOption.value;
-      answerData();
-      const correctAnswer = answer[qNum];
+      const qNum = selected[currentIndex];
+      document.getElementById('answer-img').src = `./star1/a/${qNum}.gif`;
+      document.getElementById('answer-img').style.display = 'block';
 
-      if (userAnswer === correctAnswer) {
+      const correct = answer[qNum];
+      const user = selectedOption.value;
+      if (user == correct) {
         alert("正解！");
       } else {
         alert("不正解！");
@@ -134,7 +132,6 @@
       }
     }
 
-    // 初始化
     selected = getRandomQuestions();
     loadQuestion();
   </script>
