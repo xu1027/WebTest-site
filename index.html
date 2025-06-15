@@ -61,7 +61,6 @@
     <input type="password" id="password" placeholder="パスワードを入力">
     <br>
     <button onclick="login()">ログイン</button>
-    <button onclick="register()">新規登録</button>
   </div>
 
   <div class="login-box" id="menuBox" style="display:none">
@@ -73,41 +72,36 @@
   </div>
 
   <script>
-    // 登録処理
-    function register() {
-      const id = document.getElementById('userid').value;
-      const pw = document.getElementById('password').value;
+    let userData = [];
 
-      if (id && pw) {
-        if (localStorage.getItem('user_' + id)) {
-          alert('このIDは既に登録されています。');
-        } else {
-          localStorage.setItem('user_' + id, pw);
-          alert('登録完了しました。');
-        }
-      } else {
-        alert('IDとパスワードを入力してください。');
-      }
-    }
+    // 事前に json 読み込む
+    fetch('user_accounts_100.json')  // 确保和 index.html 同目录
+      .then(res => res.json())
+      .then(data => {
+        userData = data;
+      })
+      .catch(err => {
+        alert("ユーザーリストの読み込みに失敗しました。");
+        console.error(err);
+      });
 
-    // ログイン処理
     function login() {
-      const id = document.getElementById('userid').value;
-      const pw = document.getElementById('password').value;
+      const id = document.getElementById('userid').value.trim();
+      const pw = document.getElementById('password').value.trim();
 
-      const savedPw = localStorage.getItem('user_' + id);
-      if (!savedPw) {
-        alert('このIDは登録されていません。');
-        return;
-      }
-      if (savedPw !== pw) {
-        alert('パスワードが違います。');
+      const matched = userData.find(user => user.id === id && user.password === pw);
+
+      if (!matched) {
+        alert("IDまたはパスワードが正しくありません。");
         return;
       }
 
-      // ログイン成功
+      // 成功時
       document.getElementById('loginBox').style.display = 'none';
       document.getElementById('menuBox').style.display = 'block';
+
+      // 保存当前用户 ID，如果之后需要追踪可以用
+      sessionStorage.setItem('loginUserId', id);
     }
   </script>
 </body>
