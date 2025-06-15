@@ -81,7 +81,7 @@
 
 function loadQuestion() {
   const qNum = pad(selected[currentIndex]);
-  document.getElementById('question-img').src = `./star1/q/${qNum}.gif`;
+  document.getElementById('question-img').src = `./q/${qNum}.gif`; 
   document.getElementById('answer-img').style.display = 'none';
   document.getElementById('answer-img').src = "";
   document.getElementById('counter').textContent = `第 ${currentIndex + 1} 問 / 全 ${selectCount} 問`;
@@ -89,7 +89,7 @@ function loadQuestion() {
 
 function showAnswer() {
   const qNum = pad(selected[currentIndex]);
-  document.getElementById('answer-img').src = `./star1/a/${qNum}.gif`;
+  document.getElementById('answer-img').src = `./a/${qNum}.gif`; 
   document.getElementById('answer-img').style.display = 'block';
 }
 
