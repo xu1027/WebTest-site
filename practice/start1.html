@@ -1,54 +1,111 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="shift_jis">
-  <title>四則逆算 - 開始画面</title>
+  <meta charset="UTF-8">
+  <title>四則逆算（ランダム50問）</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
       font-family: sans-serif;
-      background-color: #f0f8ff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      background-color: #f8f8ff;
+      text-align: center;
+      padding: 2rem;
     }
 
     h1 {
       color: #007aff;
-      margin-bottom: 1rem;
     }
 
-    .start-button {
-      background: url('../images/button/start.gif') no-repeat;
-      width: 333px;
-      height: 132px;
-      border: none;
+    img {
+      max-width: 90%;
+      height: auto;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    .btn {
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+      margin: 1rem;
       cursor: pointer;
+      border: none;
+      border-radius: 5px;
     }
 
-    .start-button:hover {
-      background-image: url('../images/button/start2.gif');
+    .next-btn {
+      background-color: #007aff;
+      color: white;
+    }
+
+    .answer-btn {
+      background-color: #ffcc00;
+      color: black;
+    }
+
+    #counter {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #333;
     }
   </style>
-
-  <script>
-    function startWebTest() {
-      // 设置初始时间与问题列表
-      const nowTime = new Date().getTime();
-      const startTime = nowTime;
-      const rlist = "001.002"; // 第1,2题
-      const alist = "";
-
-      const url = `./1.html?nowTime=${nowTime}&startTime=${startTime}&rlist=${rlist}&alist=${alist}`;
-      window.location.href = url;
-    }
-  </script>
 </head>
 <body>
-  <h1>四則逆算</h1>
-  <button class="start-button" onclick="startWebTest()"></button>
+
+  <h1>四則逆算（ランダム50問）</h1>
+  <div id="counter"></div>
+
+  <img id="question-img" src="" alt="問題画像">
+  <button class="btn answer-btn" onclick="showAnswer()">解答</button>
+  <button class="btn next-btn" onclick="nextQuestion()">次へ</button>
+  <img id="answer-img" src="" alt="解答画像" style="display:none;">
+
+  <script>
+    const total = 100;        // 总题数
+    const selectCount = 50;   // 抽选题数
+    let selected = [];
+    let currentIndex = 0;
+
+    // 补0函数 001, 002...
+    function pad(num) {
+      return num.toString().padStart(3, '0');
+    }
+
+    // 随机抽选不重复题号
+    function getRandomQuestions() {
+      const nums = Array.from({length: total}, (_, i) => i + 1);
+      for (let i = nums.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [nums[i], nums[j]] = [nums[j], nums[i]];
+      }
+      return nums.slice(0, selectCount);
+    }
+
+    function loadQuestion() {
+      const qNum = pad(selected[currentIndex]);
+      document.getElementById('question-img').src = `star1/q/${qNum}.png`;
+      document.getElementById('answer-img').style.display = 'none';
+      document.getElementById('answer-img').src = "";
+      document.getElementById('counter').textContent = `第 ${currentIndex + 1} 問 / 全 ${selectCount} 問`;
+    }
+
+    function showAnswer() {
+      const aNum = pad(selected[currentIndex]);
+      document.getElementById('answer-img').src = `star1/a/${aNum}.png`;
+      document.getElementById('answer-img').style.display = 'block';
+    }
+
+    function nextQuestion() {
+      if (currentIndex < selectCount - 1) {
+        currentIndex++;
+        loadQuestion();
+      } else {
+        alert("すべての問題が終了しました！");
+      }
+    }
+
+    // 初始化
+    selected = getRandomQuestions();
+    loadQuestion();
+  </script>
+
 </body>
 </html>
