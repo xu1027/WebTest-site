@@ -6,9 +6,9 @@
   <style>
     body {
       font-family: sans-serif;
+      background-color: #f0f8ff;
       text-align: center;
       padding: 3rem;
-      background-color: #f9f9f9;
     }
 
     h1 {
@@ -16,38 +16,55 @@
       margin-bottom: 2rem;
     }
 
-    p {
+    #result {
       font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    #details {
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .btn {
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
+
   <h1>結果発表</h1>
-  <p id="result">採点中...</p>
+  <div id="result">読み込み中...</div>
+  <div id="details"></div>
+  <button class="btn" onclick="location.href='start1.html'">もう一度やる</button>
 
   <script>
-    const answers = JSON.parse(localStorage.getItem('answers') || '[]');
-    const selected = JSON.parse(localStorage.getItem('selectedQuestions') || '[]');
-    let correct = 0;
+    const results = JSON.parse(sessionStorage.getItem('quizResults') || '[]');
 
-    // 正解データ
-    fetch('answer_options.json')
-      .then(response => response.json())
-      .then(options => {
-        selected.forEach((qId, index) => {
-          const question = options.find(opt => opt.id === qId);
-          if (!question) return;
-          const correctIndex = question.options.findIndex(opt => opt.correct === true);
-          if (correctIndex === -1) return;
-          if (answers[index] === correctIndex + 1) correct++;
-        });
+    if (results.length === 0) {
+      document.getElementById('result').textContent = '結果データが見つかりません。';
+    } else {
+      const correctCount = results.filter(r => r.isCorrect).length;
+      document.getElementById('result').textContent = `50問中 ${correctCount}問正解でした！`;
 
-        document.getElementById('result').textContent =
-          `50問中 ${correct}問正解！`;
-      })
-      .catch(() => {
-        document.getElementById('result').textContent = '採点データの読み込みに失敗しました。';
+      // 詳細表示（オプション）
+      let detailHTML = '<ul style="list-style:none; padding:0;">';
+      results.forEach((r, i) => {
+        const mark = r.isCorrect ? '◯' : '✕';
+        detailHTML += `<li>第${i + 1}問：選択肢${r.selected ?? '未選択'} → ${mark}</li>`;
       });
+      detailHTML += '</ul>';
+      document.getElementById('details').innerHTML = detailHTML;
+    }
   </script>
+
 </body>
 </html>
