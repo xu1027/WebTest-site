@@ -2,69 +2,97 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>結果発表</title>
+  <title>結果表示</title>
   <style>
     body {
       font-family: sans-serif;
       background-color: #f0f8ff;
+      padding: 2rem;
       text-align: center;
-      padding: 3rem;
     }
-
     h1 {
       color: #007aff;
-      margin-bottom: 2rem;
     }
-
-    #result {
+    .result {
       font-size: 1.5rem;
-      margin-bottom: 2rem;
-      color: #333;
+      margin: 1rem 0;
     }
-
-    #details {
-      font-size: 1rem;
-      color: #666;
+    table {
+      margin: 2rem auto;
+      border-collapse: collapse;
+      width: 90%;
+      max-width: 800px;
     }
-
-    .btn {
-      font-size: 1rem;
-      padding: 0.6rem 1.2rem;
-      background-color: #007aff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 2rem;
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+    }
+    th {
+      background-color: #e0f0ff;
+    }
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+    .incorrect {
+      color: red;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
   <h1>結果発表</h1>
-  <div id="result">読み込み中...</div>
-  <div id="details"></div>
-  <button class="btn" onclick="location.href='start1.html'">もう一度やる</button>
+  <div class="result" id="summary"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>問題番号</th>
+        <th>選択</th>
+        <th>正解</th>
+        <th>正誤</th>
+      </tr>
+    </thead>
+    <tbody id="result-table"></tbody>
+  </table>
 
   <script>
-    const results = JSON.parse(sessionStorage.getItem('quizResults') || '[]');
+    const resultData = JSON.parse(sessionStorage.getItem('quizResults') || '[]');
+    const tableBody = document.getElementById('result-table');
+    const summary = document.getElementById('summary');
 
-    if (results.length === 0) {
-      document.getElementById('result').textContent = '結果データが見つかりません。';
-    } else {
-      const correctCount = results.filter(r => r.isCorrect).length;
-      document.getElementById('result').textContent = `50問中 ${correctCount}問正解でした！`;
+    let correctCount = 0;
+    resultData.forEach((item, index) => {
+      const row = document.createElement('tr');
 
-      // 詳細表示（オプション）
-      let detailHTML = '<ul style="list-style:none; padding:0;">';
-      results.forEach((r, i) => {
-        const mark = r.isCorrect ? '◯' : '✕';
-        detailHTML += `<li>第${i + 1}問：選択肢${r.selected ?? '未選択'} → ${mark}</li>`;
-      });
-      detailHTML += '</ul>';
-      document.getElementById('details').innerHTML = detailHTML;
-    }
+      const cell1 = document.createElement('td');
+      cell1.textContent = index + 1;
+      row.appendChild(cell1);
+
+      const cell2 = document.createElement('td');
+      cell2.textContent = item.id;
+      row.appendChild(cell2);
+
+      const cell3 = document.createElement('td');
+      cell3.textContent = item.selected || '-';
+      row.appendChild(cell3);
+
+      const cell4 = document.createElement('td');
+      cell4.textContent = item.correct;
+      row.appendChild(cell4);
+
+      const cell5 = document.createElement('td');
+      cell5.textContent = item.isCorrect ? '〇' : '×';
+      cell5.className = item.isCorrect ? 'correct' : 'incorrect';
+      row.appendChild(cell5);
+
+      if (item.isCorrect) correctCount++;
+
+      tableBody.appendChild(row);
+    });
+
+    summary.textContent = `50問中 ${correctCount}問正解！`;
   </script>
-
 </body>
 </html>
