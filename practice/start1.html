@@ -46,6 +46,12 @@
       margin-bottom: 1rem;
       color: #333;
     }
+
+    #options-area {
+      text-align: left;
+      max-width: 600px;
+      margin: 1rem auto;
+    }
   </style>
 </head>
 <body>
@@ -54,9 +60,15 @@
   <div id="counter"></div>
 
   <img id="question-img" src="" alt="問題画像">
+  <div id="options-area"></div>
+
   <button class="btn answer-btn" onclick="showAnswer()">解答</button>
   <button class="btn next-btn" onclick="nextQuestion()">次へ</button>
+
   <img id="answer-img" src="" alt="解答画像" style="display:none;">
+
+  <!-- 引入你的 start1.js -->
+  <script src="./start1.js"></script>
 
   <script>
     const total = 100;        // 总题数
@@ -64,14 +76,8 @@
     let selected = [];
     let currentIndex = 0;
 
-    // 补0函数 001, 002...
-    function pad(num) {
-      return num.toString().padStart(3, '0');
-    }
-
-    // 随机抽选不重复题号
     function getRandomQuestions() {
-      const nums = Array.from({length: total}, (_, i) => i + 1);
+      const nums = Array.from({ length: total }, (_, i) => i + 1);
       for (let i = nums.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [nums[i], nums[j]] = [nums[j], nums[i]];
@@ -79,19 +85,45 @@
       return nums.slice(0, selectCount);
     }
 
-function loadQuestion() {
-  const qNum = selected[currentIndex];
-document.getElementById('question-img').src = `star1/q/${qNum}.gif`;
-  document.getElementById('answer-img').style.display = 'none';
-  document.getElementById('answer-img').src = "";
-  document.getElementById('counter').textContent = `第 ${currentIndex + 1} 問 / 全 ${selectCount} 問`;
-}
+    function loadQuestion() {
+      const qNum = selected[currentIndex];
+      document.getElementById('question-img').src = `./q/${qNum}.gif`;
+      document.getElementById('answer-img').style.display = 'none';
+      document.getElementById('answer-img').src = "";
+      document.getElementById('counter').textContent = `第 ${currentIndex + 1} 問 / 全 ${selectCount} 問`;
 
-function showAnswer() {
-  const qNum = selected[currentIndex];
-document.getElementById('answer-img').src = `star1/a/${qNum}.gif`;
-  document.getElementById('answer-img').style.display = 'block';
-}
+      // 显示选项
+      answerData();
+      let html = '';
+      html += `<input type="radio" name="sa" value="1"> ${answer1[qNum]}<br>`;
+      html += `<input type="radio" name="sa" value="2"> ${answer2[qNum]}<br>`;
+      html += `<input type="radio" name="sa" value="3"> ${answer3[qNum]}<br>`;
+      html += `<input type="radio" name="sa" value="4"> ${answer4[qNum]}<br>`;
+      html += `<input type="radio" name="sa" value="5"> ${answer5[qNum]}<br>`;
+      document.getElementById('options-area').innerHTML = html;
+    }
+
+    function showAnswer() {
+      const qNum = selected[currentIndex];
+      document.getElementById('answer-img').src = `./a/${qNum}.gif`;
+      document.getElementById('answer-img').style.display = 'block';
+
+      const selectedOption = document.querySelector('input[name="sa"]:checked');
+      if (!selectedOption) {
+        alert("選択肢を選んでください！");
+        return;
+      }
+
+      const userAnswer = selectedOption.value;
+      answerData();
+      const correctAnswer = answer[qNum];
+
+      if (userAnswer === correctAnswer) {
+        alert("正解！");
+      } else {
+        alert("不正解！");
+      }
+    }
 
     function nextQuestion() {
       if (currentIndex < selectCount - 1) {
