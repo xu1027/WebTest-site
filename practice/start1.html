@@ -80,6 +80,7 @@
     let selected = [];
     let currentIndex = 0;
     let allOptions = [];
+    let userAnswers = []; // 保存用户选择
 
     const totalLimit = 9 * 60; // 9分
     let elapsed = 0;
@@ -91,7 +92,7 @@
       document.getElementById('seconds').textContent = secs;
 
       if (elapsed >= totalLimit) {
-        window.location.href = 'end1.html';
+        finishQuiz();
       }
     }
     setInterval(updateTimer, 1000);
@@ -130,9 +131,47 @@
         input.style.marginRight = '0.5rem';
 
         label.appendChild(input);
-        label.appendChild(document.createTextNode(`${index + 1}. ${opt}`));
+        label.appendChild(document.createTextNode(`${index + 1}. ${opt.text || opt}`));
         container.appendChild(label);
       });
+    }
+
+    function saveAnswer() {
+      const qNum = selected[currentIndex];
+      const selectedInput = document.querySelector(`input[name="option-${qNum}"]:checked`);
+      const selectedValue = selectedInput ? parseInt(selectedInput.value) : null;
+      const item = allOptions.find(opt => opt.id === qNum);
+      const correctIndex = item.options.findIndex(opt => opt.correct);
+      const correctAnswer = correctIndex + 1;
+
+      userAnswers.push({
+        id: qNum,
+        selected: selectedValue,
+        correct: correctAnswer,
+        isCorrect: selectedValue === correctAnswer
+      });
+    }
+
+    function showAnswer() {
+      const aNum = selected[currentIndex];
+      document.getElementById('answer-img').src = `star1/a/${aNum}.gif`;
+      document.getElementById('answer-img').style.display = 'block';
+    }
+
+    function nextQuestion() {
+      saveAnswer();
+      if (currentIndex < selectCount - 1) {
+        currentIndex++;
+        loadQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      saveAnswer();
+      sessionStorage.setItem('quizResults', JSON.stringify(userAnswers));
+      window.location.href = 'end1.html';
     }
 
     function loadQuestion() {
@@ -144,22 +183,7 @@
       renderOptions(qNum);
     }
 
-    function showAnswer() {
-      const aNum = selected[currentIndex];
-      document.getElementById('answer-img').src = `star1/a/${aNum}.gif`;
-      document.getElementById('answer-img').style.display = 'block';
-    }
-
-    function nextQuestion() {
-      if (currentIndex < selectCount - 1) {
-        currentIndex++;
-        loadQuestion();
-      } else {
-        alert("すべての問題が終了しました！");
-      }
-    }
-
-    fetch('star1/answer_options.json')
+    fetch('star1/final_answer_options_100.json')
       .then(response => response.json())
       .then(data => {
         allOptions = data;
