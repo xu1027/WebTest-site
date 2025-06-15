@@ -1,11 +1,11 @@
 /**
- * 1.1 Œv”—‰ğƒeƒXƒgFl‘¥‹tZ@ê—pƒƒ\ƒbƒh
- * @@‘I‘ğ” 	5
- * @@§ŒÀŠÔ 9•ª
- * @@–â‘è”		50–â
+ * 1.1 Å’vÂâ€â€”Ââ€°Ã°Æ’eÆ’XÆ’gÂFÅ½lâ€˜Â¥â€¹tÅ½ZÂ@ÂÃªâ€”pÆ’ÂÆ’\Æ’bÆ’h
+ * Â@Â@â€˜Iâ€˜Ã°Ââ€ 	5
+ * Â@Â@ÂÂ§Å’Ã€Å½Å¾Å Ã” 9â€¢Âª
+ * Â@Â@â€“Ã¢â€˜Ã¨Ââ€		50â€“Ã¢
  **/
 
-// ‰Šú’l
+// Ââ€°Å Ãºâ€™l
 var start 		= new Date();
 var hour 			= 0;
 var min 			= 0;
@@ -20,14 +20,14 @@ var answer5 	= new Object();
 var question	= Array();
 var answer		= Array();
 
-// Œo‰ßŠÔ‚Ì‰ğÍ
+// Å’oâ€°ÃŸÅ½Å¾Å Ã”â€šÃŒâ€°Ã°ÂÃ
 function disp(){
 	now 	= new Date();
 	datet = parseInt((now.getTime() - start.getTime()) / 1000);
 	hour 	= parseInt(datet / 3600);
 	min 	= parseInt(datet / 60);
 	sec 	= datet % 60;
-	// ”’l‚ª1Œ…‚Ìê‡A“ª‚É0‚ğ•t‚¯‚Ä2Œ…‚Å•\¦‚·‚éw’è
+	// Ââ€â€™lâ€šÂª1Å’â€¦â€šÃŒÂÃªÂâ€¡ÂAâ€œÂªâ€šÃ‰0â€šÃ°â€¢tâ€šÂ¯â€šÃ„2Å’â€¦â€šÃ…â€¢\Å½Â¦â€šÂ·â€šÃ©Å½wâ€™Ã¨
 	if ( hour < 10 ) {
 		hour = "0" + hour;
 	}
@@ -37,10 +37,10 @@ function disp(){
 	if ( sec < 10 ) {
 		sec = "0" + sec;
 	}
-	// ƒeƒLƒXƒgƒtƒB[ƒ‹ƒh‚Éƒf[ƒ^‚ğ“n‚·ˆ—
+	// Æ’eÆ’LÆ’XÆ’gÆ’tÆ’BÂ[Æ’â€¹Æ’hâ€šÃ‰Æ’fÂ[Æ’^â€šÃ°â€œnâ€šÂ·ÂË†â€”Â
 	document.startForm.nowTime.value = now.getTime();
 	document.startForm.startTime.value = start.getTime();
-	// §ŒÀŠÔ‚Ìİ’è
+	// ÂÂ§Å’Ã€Å½Å¾Å Ã”â€šÃŒÂÃâ€™Ã¨
 	if ( datet < 540 ) {
 		setTimeout( "disp()", 1000 );
 	} else {
@@ -48,22 +48,22 @@ function disp(){
 	}
 }
 
-// §ŒÀŠÔ
+// ÂÂ§Å’Ã€Å½Å¾Å Ã”
 function msg() {
-	alert( "§ŒÀŠÔ‚Å‚·I" );
+	alert( "ÂÂ§Å’Ã€Å½Å¾Å Ã”â€šÃ…â€šÂ·ÂI" );
 	return;
 }
 
-// ƒeƒXƒgŠJn
+// Æ’eÆ’XÆ’gÅ JÅ½n
 function startWebTest() {
 	disp();
 	document.startForm.submit();
 	return;
 }
 
-// ‘I‘ğˆî•ñ
+// â€˜Iâ€˜Ã°Å½Ë†ÂÃ®â€¢Ã±
 function answerData() {
-	// ‘I‘ğˆ‚P”Ô–Ú
+	// â€˜Iâ€˜Ã°Å½Ë†â€šPâ€Ã”â€“Ãš
 	this.answer1[1] 	= "8";
 	this.answer1[2] 	= "10.4";
 	this.answer1[3] 	= "3.2";
@@ -75,8 +75,8 @@ function answerData() {
 	this.answer1[9] 	= "1/2";
 	this.answer1[10] 	= "2/35";
 	this.answer1[11] 	= "1/3";
-	this.answer1[12] 	= "5“";
-	this.answer1[13] 	= "10.5“";
+	this.answer1[12] 	= "5Ââ€œ";
+	this.answer1[13] 	= "10.5Ââ€œ";
 	this.answer1[14] 	= "55";
 	this.answer1[15] 	= "2";
 	this.answer1[16] 	= "1/4";
@@ -88,7 +88,7 @@ function answerData() {
 	this.answer1[22] 	= "42";
 	this.answer1[23] 	= "1";
 	this.answer1[24] 	= "40";
-	this.answer1[25] 	= "5“";
+	this.answer1[25] 	= "5Ââ€œ";
 	this.answer1[26] 	= "1/8";
 	this.answer1[27] 	= "32";
 	this.answer1[28] 	= "1482";
@@ -102,7 +102,7 @@ function answerData() {
 	this.answer1[36] 	= "1";
 	this.answer1[37] 	= "40";
 	this.answer1[38] 	= "1";
-	this.answer1[39] 	= "5“";
+	this.answer1[39] 	= "5Ââ€œ";
 	this.answer1[40] 	= "18.2";
 	this.answer1[41] 	= "8";
 	this.answer1[42] 	= "8";
@@ -120,8 +120,8 @@ function answerData() {
 	this.answer1[54] 	= "46";
 	this.answer1[55] 	= "1404";
 	this.answer1[56] 	= "1/11";
-	this.answer1[57] 	= "2“";
-	this.answer1[58] 	= "7“";
+	this.answer1[57] 	= "2Ââ€œ";
+	this.answer1[58] 	= "7Ââ€œ";
 	this.answer1[59] 	= "1.75";
 	this.answer1[60] 	= "360";
 	this.answer1[61] 	= "0.3";
@@ -142,19 +142,19 @@ function answerData() {
 	this.answer1[76] 	= "1/4";
 	this.answer1[77] 	= "1/2";
 	this.answer1[78] 	= "11/28";
-	this.answer1[79] 	= "30“";
+	this.answer1[79] 	= "30Ââ€œ";
 	this.answer1[80] 	= "219";
 	this.answer1[81] 	= "2";
 	this.answer1[82] 	= "5";
 	this.answer1[83] 	= "3";
-	this.answer1[84] 	= "6“";
-	this.answer1[85] 	= "25“";
+	this.answer1[84] 	= "6Ââ€œ";
+	this.answer1[85] 	= "25Ââ€œ";
 	this.answer1[86] 	= "7/60";
 	this.answer1[87] 	= "5/8";
 	this.answer1[88] 	= "18";
 	this.answer1[89] 	= "30";
 	this.answer1[90] 	= "2";
-	this.answer1[91] 	= "30“";
+	this.answer1[91] 	= "30Ââ€œ";
 	this.answer1[92] 	= "1/4";
 	this.answer1[93] 	= "10";
 	this.answer1[94] 	= "2/3";
@@ -165,7 +165,7 @@ function answerData() {
 	this.answer1[99] 	= "2/5";
 	this.answer1[100] = "10";
 
-	// ‘I‘ğˆ‚Q”Ô–Ú
+	// â€˜Iâ€˜Ã°Å½Ë†â€šQâ€Ã”â€“Ãš
 	this.answer2[1] 	= "16";
 	this.answer2[2] 	= "19.4";
 	this.answer2[3] 	= "3.3";
@@ -177,8 +177,8 @@ function answerData() {
 	this.answer2[9] 	= "1/3";
 	this.answer2[10] 	= "3/35";
 	this.answer2[11] 	= "3/7";
-	this.answer2[12] 	= "10“";
-	this.answer2[13] 	= "11“";
+	this.answer2[12] 	= "10Ââ€œ";
+	this.answer2[13] 	= "11Ââ€œ";
 	this.answer2[14] 	= "66";
 	this.answer2[15] 	= "3";
 	this.answer2[16] 	= "3/4";
@@ -190,7 +190,7 @@ function answerData() {
 	this.answer2[22] 	= "44";
 	this.answer2[23] 	= "2";
 	this.answer2[24] 	= "50";
-	this.answer2[25] 	= "6“";
+	this.answer2[25] 	= "6Ââ€œ";
 	this.answer2[26] 	= "3/8";
 	this.answer2[27] 	= "33";
 	this.answer2[28] 	= "1539";
@@ -204,7 +204,7 @@ function answerData() {
 	this.answer2[36] 	= "2";
 	this.answer2[37] 	= "56";
 	this.answer2[38] 	= "1/4";
-	this.answer2[39] 	= "10“";
+	this.answer2[39] 	= "10Ââ€œ";
 	this.answer2[40] 	= "20.4";
 	this.answer2[41] 	= "10";
 	this.answer2[42] 	= "10";
@@ -222,8 +222,8 @@ function answerData() {
 	this.answer2[54] 	= "48";
 	this.answer2[55] 	= "1408";
 	this.answer2[56] 	= "2/13";
-	this.answer2[57] 	= "4“";
-	this.answer2[58] 	= "9“";
+	this.answer2[57] 	= "4Ââ€œ";
+	this.answer2[58] 	= "9Ââ€œ";
 	this.answer2[59] 	= "1.8";
 	this.answer2[60] 	= "380";
 	this.answer2[61] 	= "0.4";
@@ -244,19 +244,19 @@ function answerData() {
 	this.answer2[76] 	= "3/4";
 	this.answer2[77] 	= "1/3";
 	this.answer2[78] 	= "15/32";
-	this.answer2[79] 	= "35“";
+	this.answer2[79] 	= "35Ââ€œ";
 	this.answer2[80] 	= "2/21";
 	this.answer2[81] 	= "3";
 	this.answer2[82] 	= "6";
 	this.answer2[83] 	= "3.5";
-	this.answer2[84] 	= "6.5“";
-	this.answer2[85] 	= "40“";
+	this.answer2[84] 	= "6.5Ââ€œ";
+	this.answer2[85] 	= "40Ââ€œ";
 	this.answer2[86] 	= "9/60";
 	this.answer2[87] 	= "7/8";
 	this.answer2[88] 	= "20";
 	this.answer2[89] 	= "35";
 	this.answer2[90] 	= "2.5";
-	this.answer2[91] 	= "35“";
+	this.answer2[91] 	= "35Ââ€œ";
 	this.answer2[92] 	= "1/5";
 	this.answer2[93] 	= "10.5";
 	this.answer2[94] 	= "5/4";
@@ -267,7 +267,7 @@ function answerData() {
 	this.answer2[99] 	= "4/5";
 	this.answer2[100] = "11";
 
-	// ‘I‘ğˆ‚R”Ô–Ú
+	// â€˜Iâ€˜Ã°Å½Ë†â€šRâ€Ã”â€“Ãš
 	this.answer3[1] 	= "24";
 	this.answer3[2] 	= "20.4";
 	this.answer3[3] 	= "3.4";
@@ -279,8 +279,8 @@ function answerData() {
 	this.answer3[9] 	= "1/4";
 	this.answer3[10] 	= "6/35";
 	this.answer3[11] 	= "7/24";
-	this.answer3[12] 	= "15“";
-	this.answer3[13] 	= "11.5“";
+	this.answer3[12] 	= "15Ââ€œ";
+	this.answer3[13] 	= "11.5Ââ€œ";
 	this.answer3[14] 	= "77";
 	this.answer3[15] 	= "4";
 	this.answer3[16] 	= "3/5";
@@ -292,7 +292,7 @@ function answerData() {
 	this.answer3[22] 	= "46";
 	this.answer3[23] 	= "3";
 	this.answer3[24] 	= "60";
-	this.answer3[25] 	= "7“";
+	this.answer3[25] 	= "7Ââ€œ";
 	this.answer3[26] 	= "2/9";
 	this.answer3[27] 	= "34.5";
 	this.answer3[28] 	= "1566";
@@ -306,10 +306,10 @@ function answerData() {
 	this.answer3[36] 	= "3";
 	this.answer3[37] 	= "66";
 	this.answer3[38] 	= "1/3";
-	this.answer3[39] 	= "15“";
+	this.answer3[39] 	= "15Ââ€œ";
 	this.answer3[40] 	= "23.2";
 	this.answer3[41] 	= "12";
-	this.answer3[42] 	= "|4";
+	this.answer3[42] 	= "Â|4";
 	this.answer3[43] 	= "4/45";
 	this.answer3[44] 	= "34";
 	this.answer3[45] 	= "3/4";
@@ -324,8 +324,8 @@ function answerData() {
 	this.answer3[54] 	= "50";
 	this.answer3[55] 	= "1464";
 	this.answer3[56] 	= "1/18";
-	this.answer3[57] 	= "6“";
-	this.answer3[58] 	= "10“";
+	this.answer3[57] 	= "6Ââ€œ";
+	this.answer3[58] 	= "10Ââ€œ";
 	this.answer3[59] 	= "2";
 	this.answer3[60] 	= "400";
 	this.answer3[61] 	= "0.45";
@@ -346,19 +346,19 @@ function answerData() {
 	this.answer3[76] 	= "2/5";
 	this.answer3[77] 	= "2";
 	this.answer3[78] 	= "19/32";
-	this.answer3[79] 	= "40“";
+	this.answer3[79] 	= "40Ââ€œ";
 	this.answer3[80] 	= "2/23";
 	this.answer3[81] 	= "4";
 	this.answer3[82] 	= "7";
 	this.answer3[83] 	= "4";
-	this.answer3[84] 	= "7“";
-	this.answer3[85] 	= "45“";
+	this.answer3[84] 	= "7Ââ€œ";
+	this.answer3[85] 	= "45Ââ€œ";
 	this.answer3[86] 	= "11/60";
 	this.answer3[87] 	= "4/9";
 	this.answer3[88] 	= "22";
 	this.answer3[89] 	= "38";
 	this.answer3[90] 	= "3";
-	this.answer3[91] 	= "40“";
+	this.answer3[91] 	= "40Ââ€œ";
 	this.answer3[92] 	= "1/6";
 	this.answer3[93] 	= "11";
 	this.answer3[94] 	= "4/5";
@@ -369,7 +369,7 @@ function answerData() {
 	this.answer3[99] 	= "5/6";
 	this.answer3[100] = "11.5";
 
-	// ‘I‘ğˆ‚S”Ô–Ú
+	// â€˜Iâ€˜Ã°Å½Ë†â€šSâ€Ã”â€“Ãš
 	this.answer4[1] 	= "32";
 	this.answer4[2] 	= "22.4";
 	this.answer4[3] 	= "3.5";
@@ -381,8 +381,8 @@ function answerData() {
 	this.answer4[9] 	= "1/5";
 	this.answer4[10] 	= "16/35";
 	this.answer4[11] 	= "21";
-	this.answer4[12] 	= "25“";
-	this.answer4[13] 	= "12.5“";
+	this.answer4[12] 	= "25Ââ€œ";
+	this.answer4[13] 	= "12.5Ââ€œ";
 	this.answer4[14] 	= "88";
 	this.answer4[15] 	= "5";
 	this.answer4[16] 	= "4/5";
@@ -394,7 +394,7 @@ function answerData() {
 	this.answer4[22] 	= "54";
 	this.answer4[23] 	= "4";
 	this.answer4[24] 	= "70";
-	this.answer4[25] 	= "8“";
+	this.answer4[25] 	= "8Ââ€œ";
 	this.answer4[26] 	= "3/9";
 	this.answer4[27] 	= "35.5";
 	this.answer4[28] 	= "1600";
@@ -408,10 +408,10 @@ function answerData() {
 	this.answer4[36] 	= "4";
 	this.answer4[37] 	= "78";
 	this.answer4[38] 	= "1/2";
-	this.answer4[39] 	= "18“";
+	this.answer4[39] 	= "18Ââ€œ";
 	this.answer4[40] 	= "34.6";
 	this.answer4[41] 	= "14";
-	this.answer4[42] 	= "|12";
+	this.answer4[42] 	= "Â|12";
 	this.answer4[43] 	= "7/45";
 	this.answer4[44] 	= "35";
 	this.answer4[45] 	= "2/5";
@@ -426,8 +426,8 @@ function answerData() {
 	this.answer4[54] 	= "52";
 	this.answer4[55] 	= "1502";
 	this.answer4[56] 	= "2/21";
-	this.answer4[57] 	= "8“";
-	this.answer4[58] 	= "12“";
+	this.answer4[57] 	= "8Ââ€œ";
+	this.answer4[58] 	= "12Ââ€œ";
 	this.answer4[59] 	= "2.15";
 	this.answer4[60] 	= "410";
 	this.answer4[61] 	= "0.5";
@@ -448,19 +448,19 @@ function answerData() {
 	this.answer4[76] 	= "3/5";
 	this.answer4[77] 	= "5/2";
 	this.answer4[78] 	= "11/26";
-	this.answer4[79] 	= "50“";
+	this.answer4[79] 	= "50Ââ€œ";
 	this.answer4[80] 	= "2/25";
 	this.answer4[81] 	= "5";
 	this.answer4[82] 	= "8";
 	this.answer4[83] 	= "4.5";
-	this.answer4[84] 	= "7.5“";
-	this.answer4[85] 	= "55“";
+	this.answer4[84] 	= "7.5Ââ€œ";
+	this.answer4[85] 	= "55Ââ€œ";
 	this.answer4[86] 	= "13/60";
 	this.answer4[87] 	= "7/16";
 	this.answer4[88] 	= "24";
 	this.answer4[89] 	= "40";
 	this.answer4[90] 	= "3.5";
-	this.answer4[91] 	= "45“";
+	this.answer4[91] 	= "45Ââ€œ";
 	this.answer4[92] 	= "1/7";
 	this.answer4[93] 	= "11.5";
 	this.answer4[94] 	= "7/5";
@@ -471,7 +471,7 @@ function answerData() {
 	this.answer4[99] 	= "7/6";
 	this.answer4[100] = "12";
 
-	// ‘I‘ğˆ‚T”Ô–Ú
+	// â€˜Iâ€˜Ã°Å½Ë†â€šTâ€Ã”â€“Ãš
 	this.answer5[1] 	= "34";
 	this.answer5[2] 	= "24.4";
 	this.answer5[3] 	= "3.6";
@@ -483,8 +483,8 @@ function answerData() {
 	this.answer5[9] 	= "1/6";
 	this.answer5[10] 	= "21/35";
 	this.answer5[11] 	= "42";
-	this.answer5[12] 	= "30“";
-	this.answer5[13] 	= "13“";
+	this.answer5[12] 	= "30Ââ€œ";
+	this.answer5[13] 	= "13Ââ€œ";
 	this.answer5[14] 	= "99";
 	this.answer5[15] 	= "6";
 	this.answer5[16] 	= "1/6";
@@ -496,7 +496,7 @@ function answerData() {
 	this.answer5[22] 	= "68";
 	this.answer5[23] 	= "5";
 	this.answer5[24] 	= "80";
-	this.answer5[25] 	= "20“";
+	this.answer5[25] 	= "20Ââ€œ";
 	this.answer5[26] 	= "5/12";
 	this.answer5[27] 	= "37.5";
 	this.answer5[28] 	= "1625";
@@ -510,10 +510,10 @@ function answerData() {
 	this.answer5[36] 	= "5";
 	this.answer5[37] 	= "99";
 	this.answer5[38] 	= "3/4";
-	this.answer5[39] 	= "20“";
+	this.answer5[39] 	= "20Ââ€œ";
 	this.answer5[40] 	= "45.8";
 	this.answer5[41] 	= "16";
-	this.answer5[42] 	= "|18";
+	this.answer5[42] 	= "Â|18";
 	this.answer5[43] 	= "5/56";
 	this.answer5[44] 	= "36";
 	this.answer5[45] 	= "7/8";
@@ -528,8 +528,8 @@ function answerData() {
 	this.answer5[54] 	= "56";
 	this.answer5[55] 	= "1524";
 	this.answer5[56] 	= "3/23";
-	this.answer5[57] 	= "10“";
-	this.answer5[58] 	= "13“";
+	this.answer5[57] 	= "10Ââ€œ";
+	this.answer5[58] 	= "13Ââ€œ";
 	this.answer5[59] 	= "2.25";
 	this.answer5[60] 	= "420";
 	this.answer5[61] 	= "0.55";
@@ -550,19 +550,19 @@ function answerData() {
 	this.answer5[76] 	= "4/7";
 	this.answer5[77] 	= "3";
 	this.answer5[78] 	= "13/36";
-	this.answer5[79] 	= "55“";
+	this.answer5[79] 	= "55Ââ€œ";
 	this.answer5[80] 	= "2/27";
 	this.answer5[81] 	= "6";
 	this.answer5[82] 	= "9";
 	this.answer5[83] 	= "5";
-	this.answer5[84] 	= "8“";
-	this.answer5[85] 	= "60“";
+	this.answer5[84] 	= "8Ââ€œ";
+	this.answer5[85] 	= "60Ââ€œ";
 	this.answer5[86] 	= "19/60";
 	this.answer5[87] 	= "9/16";
 	this.answer5[88] 	= "26";
 	this.answer5[89] 	= "45";
 	this.answer5[90] 	= "4";
-	this.answer5[91] 	= "50“";
+	this.answer5[91] 	= "50Ââ€œ";
 	this.answer5[92] 	= "1/8";
 	this.answer5[93] 	= "12";
 	this.answer5[94] 	= "8/7";
@@ -575,7 +575,7 @@ function answerData() {
 	return;
 }
 
-// “š‚¦î•ñ
+// â€œÅ¡â€šÂ¦ÂÃ®â€¢Ã±
 function getCorrectAnswer( n, aid ) {
 	rs = "";
 	this.answer[1] 		= "4";
@@ -679,16 +679,16 @@ function getCorrectAnswer( n, aid ) {
 	this.answer[99] 	= "4";
 	this.answer[100] 	= "5";
 
-	// “š‚¦‡‚í‚¹
+	// â€œÅ¡â€šÂ¦Ââ€¡â€šÃ­â€šÂ¹
 	if ( this.answer[n] == aid ) {
-		rs = "<font color=\"#FF0000\">³‰ğ</font>";
+		rs = "<font color=\"#FF0000\">ÂÂ³â€°Ã°</font>";
 	} else {
-		rs = "•s³‰ğ";
+		rs = "â€¢sÂÂ³â€°Ã°";
 	}
 	return rs;
 }
 
-// ‘I‘ğˆî•ñ‚Ìæ“¾
+// â€˜Iâ€˜Ã°Å½Ë†ÂÃ®â€¢Ã±â€šÃŒÅ½Ã¦â€œÂ¾
 function getAnswer( rid ) {
 	answerData();
 	document.write( "<input type=\"radio\" name=\"sa\" value=\"1\">"+this.answer1[ rid ]+"<br>\n");
@@ -699,7 +699,7 @@ function getAnswer( rid ) {
 	return;
 }
 
-// ‘I‘ğˆî•ñ‚Ìæ“¾iŠù‚É‰ñ“šÏ‚İ‚Åu–ß‚éƒ{ƒ^ƒ“vˆ—‘Î‰j
+// â€˜Iâ€˜Ã°Å½Ë†ÂÃ®â€¢Ã±â€šÃŒÅ½Ã¦â€œÂ¾ÂiÅ Ã¹â€šÃ‰â€°Ã±â€œÅ¡ÂÃâ€šÃâ€šÃ…Âuâ€“ÃŸâ€šÃ©Æ’{Æ’^Æ’â€œÂvÂË†â€”Ââ€˜Ãâ€°Å¾Âj
 function getSelectAnswer( rid, aid ) {
 	answerData();
 	if ( aid == "1" ) {
@@ -736,7 +736,7 @@ function getSelectAnswer( rid, aid ) {
 	return;
 }
 
-// w’è‚Ì‰ñ“š‚ğæ“¾
+// Å½wâ€™Ã¨â€šÃŒâ€°Ã±â€œÅ¡â€šÃ°Å½Ã¦â€œÂ¾
 function getAnswerMatch( aname, qid ) {
 	ra = "";
 	answerData();
@@ -754,7 +754,7 @@ function getAnswerMatch( aname, qid ) {
 	return ra;
 }
 
-// ¿–âî•ñ
+// Å½Â¿â€“Ã¢ÂÃ®â€¢Ã±
 function questionData() {
 	this.question[0] 		= "1";
 	this.question[1] 		= "2";
@@ -859,7 +859,7 @@ function questionData() {
 	return;
 }
 
-// ƒ‰ƒ“ƒ_ƒ€ˆ—
+// Æ’â€°Æ’â€œÆ’_Æ’â‚¬ÂË†â€”Â
 function randomData() {
 	for( i = 0; i < this.question.length; i++ ) {
 		var tmpA, tmpB, rnd;
