@@ -54,16 +54,18 @@
     #options-container {
       margin: 1rem auto;
     }
+
+    #timer {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      color: #d9534f;
+    }
   </style>
 </head>
 <body>
-  <div id="timer" style="font-size: 1.2rem; margin-top: 1rem; color: #d9534f;">
-  経過時間：<span id="minutes">00</span> 分 <span id="seconds">00</span> 秒
-</div>
-
-
   <h1>四則逆算（ランダム50問）</h1>
   <div id="counter"></div>
+  <div id="timer">経過時間：<span id="minutes">00</span> 分 <span id="seconds">00</span> 秒</div>
 
   <img id="question-img" src="" alt="問題画像">
   <div id="options-container"></div>
@@ -79,6 +81,21 @@
     let currentIndex = 0;
     let allOptions = [];
 
+    const totalLimit = 9 * 60; // 9分
+    let elapsed = 0;
+    function updateTimer() {
+      elapsed++;
+      const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+      const secs = String(elapsed % 60).padStart(2, '0');
+      document.getElementById('minutes').textContent = mins;
+      document.getElementById('seconds').textContent = secs;
+
+      if (elapsed >= totalLimit) {
+        window.location.href = 'end1.html';
+      }
+    }
+    setInterval(updateTimer, 1000);
+
     function getRandomQuestions() {
       const nums = Array.from({length: total}, (_, i) => i + 1);
       for (let i = nums.length - 1; i > 0; i--) {
@@ -89,37 +106,34 @@
     }
 
     function renderOptions(qNum) {
-  const container = document.getElementById('options-container');
-  container.innerHTML = '';
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
 
-  const item = allOptions.find(opt => opt.id === qNum);
-  if (!item) {
-    container.innerHTML = '<p>選択肢が見つかりません</p>';
-    return;
-  }
+      const item = allOptions.find(opt => opt.id === qNum);
+      if (!item) {
+        container.innerHTML = '<p>選択肢が見つかりません</p>';
+        return;
+      }
 
-  // 单选按钮组名称唯一
-  const groupName = `option-${qNum}`;
+      const groupName = `option-${qNum}`;
+      item.options.forEach((opt, index) => {
+        const label = document.createElement('label');
+        label.style.display = 'block';
+        label.style.margin = '0.5rem 0';
+        label.style.cursor = 'pointer';
+        label.style.fontSize = '1rem';
 
-  item.options.forEach((opt, index) => {
-    const label = document.createElement('label');
-    label.style.display = 'block';
-    label.style.margin = '0.5rem 0';
-    label.style.cursor = 'pointer';
-    label.style.fontSize = '1rem';
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = groupName;
+        input.value = index + 1;
+        input.style.marginRight = '0.5rem';
 
-    const input = document.createElement('input');
-    input.type = 'radio';
-    input.name = groupName;
-    input.value = index + 1;
-    input.style.marginRight = '0.5rem';
-
-    label.appendChild(input);
-    label.appendChild(document.createTextNode(`${index + 1}. ${opt}`));
-    container.appendChild(label);
-  });
-}
-
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(`${index + 1}. ${opt}`));
+        container.appendChild(label);
+      });
+    }
 
     function loadQuestion() {
       const qNum = selected[currentIndex];
@@ -145,7 +159,6 @@
       }
     }
 
-    // 初始化
     fetch('star1/answer_options.json')
       .then(response => response.json())
       .then(data => {
@@ -158,6 +171,5 @@
         alert("選択肢の読み込みに失敗しました。");
       });
   </script>
-
 </body>
 </html>
