@@ -72,6 +72,7 @@
 
   <button class="btn answer-btn" onclick="showAnswer()">解答</button>
   <button class="btn next-btn" onclick="nextQuestion()">次へ</button>
+  <button class="btn" onclick="finishQuiz()">終了</button>
   <img id="answer-img" src="" alt="解答画像" style="display:none;">
 
   <script>
@@ -80,10 +81,11 @@
     let selected = [];
     let currentIndex = 0;
     let allOptions = [];
-    let userAnswers = []; // 保存用户选择
+    let userAnswers = [];
 
-    const totalLimit = 9 * 60; // 9分
+    const totalLimit = 9 * 60;
     let elapsed = 0;
+
     function updateTimer() {
       elapsed++;
       const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
@@ -98,7 +100,7 @@
     setInterval(updateTimer, 1000);
 
     function getRandomQuestions() {
-      const nums = Array.from({length: total}, (_, i) => i + 1);
+      const nums = Array.from({ length: total }, (_, i) => i + 1);
       for (let i = nums.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [nums[i], nums[j]] = [nums[j], nums[i]];
@@ -158,25 +160,26 @@
       document.getElementById('answer-img').style.display = 'block';
     }
 
-　　function nextQuestion() {
-  const qNum = selected[currentIndex];
-  const selectedInput = document.querySelector(`input[name="option-${qNum}"]:checked`);
-  if (!selectedInput) {
-    alert("選択肢を選んでください。");
-    return;
-  }
-
-  saveAnswer();
-  if (currentIndex < selectCount - 1) {
-    currentIndex++;
-    loadQuestion();
-  } else {
-    finishQuiz();
-  }
-}
-
+    function nextQuestion() {
+      const qNum = selected[currentIndex];
+      const selectedInput = document.querySelector(`input[name="option-${qNum}"]:checked`);
+      if (!selectedInput) {
+        alert("選択肢を選んでください。");
+        return;
+      }
+      saveAnswer();
+      if (currentIndex < selectCount - 1) {
+        currentIndex++;
+        loadQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
 
     function finishQuiz() {
+      const confirmEnd = confirm("終了しますか？現在の回答が集計されます。");
+      if (!confirmEnd) return;
+
       saveAnswer();
       sessionStorage.setItem('quizResults', JSON.stringify(userAnswers));
       window.location.href = 'end1.html';
