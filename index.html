@@ -2,7 +2,6 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webテストログイン</title>
   <style>
     body {
@@ -21,9 +20,9 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       text-align: center;
     }
-    .login-box input[type="text"] {
+    .login-box input {
       padding: 0.5rem;
-      margin: 1rem 0;
+      margin: 0.5rem 0;
       width: 80%;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -35,6 +34,7 @@
       padding: 0.6rem 1.5rem;
       border-radius: 8px;
       cursor: pointer;
+      margin: 0.5rem;
     }
     .branch-buttons {
       margin-top: 2rem;
@@ -54,11 +54,14 @@
   </style>
 </head>
 <body>
+
   <div class="login-box" id="loginBox">
     <h2>ログイン</h2>
-    <input type="text" id="username" placeholder="ユーザー名を入力">
+    <input type="text" id="userid" placeholder="IDを入力">
+    <input type="password" id="password" placeholder="パスワードを入力">
     <br>
     <button onclick="login()">ログイン</button>
+    <button onclick="register()">新規登録</button>
   </div>
 
   <div class="login-box" id="menuBox" style="display:none">
@@ -70,14 +73,41 @@
   </div>
 
   <script>
-    function login() {
-      const username = document.getElementById('username').value;
-      if (username.trim() !== "") {
-        document.getElementById('loginBox').style.display = 'none';
-        document.getElementById('menuBox').style.display = 'block';
+    // 登録処理
+    function register() {
+      const id = document.getElementById('userid').value;
+      const pw = document.getElementById('password').value;
+
+      if (id && pw) {
+        if (localStorage.getItem('user_' + id)) {
+          alert('このIDは既に登録されています。');
+        } else {
+          localStorage.setItem('user_' + id, pw);
+          alert('登録完了しました。');
+        }
       } else {
-        alert("ユーザー名を入力してください。");
+        alert('IDとパスワードを入力してください。');
       }
+    }
+
+    // ログイン処理
+    function login() {
+      const id = document.getElementById('userid').value;
+      const pw = document.getElementById('password').value;
+
+      const savedPw = localStorage.getItem('user_' + id);
+      if (!savedPw) {
+        alert('このIDは登録されていません。');
+        return;
+      }
+      if (savedPw !== pw) {
+        alert('パスワードが違います。');
+        return;
+      }
+
+      // ログイン成功
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('menuBox').style.display = 'block';
     }
   </script>
 </body>
