@@ -74,7 +74,7 @@
   <script>
     let userData = [];
 
-    // JSON ファイルから ID/PW を読み込む（※必ず ID/ 下に配置）
+    // JSON ファイルから ID/PW を読み込む
     fetch('ID/user_accounts_100.json')
       .then(res => res.json())
       .then(data => {
@@ -99,6 +99,19 @@
       if (!matched) {
         alert("IDまたはパスワードが正しくありません。");
         return;
+      }
+
+      // ✅ 初回ログインチェック & Googleフォーム送信
+      if (!localStorage.getItem('hasLogged_' + id)) {
+        fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLSceZiYuLixpVPwszSToxnBx5jZVWRWc-esi01A29W0Do08FWg/formResponse", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: `entry.1723209052=${encodeURIComponent(id)}`
+        });
+        localStorage.setItem('hasLogged_' + id, 'true');
       }
 
       // 成功時：ログイン情報保存・画面切替・ユーザー表示
